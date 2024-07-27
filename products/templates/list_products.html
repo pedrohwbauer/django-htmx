@@ -10,16 +10,28 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-md">
-          <label for="">Product name:</label>
-          <input type="text" name="product" class="form-control" hx-get="{% url 'check_product' %}", hx-trigger="keyup" hx-target="#product-out">
-          <div id="product-out"></div>
-          <br>
-          <label for="">Product price:</label>
-          <input type="number" name="price" class="form-control">
-          <br>
-          <button class="btn btn-success">Save</button>
-        </div>
+        <form>
+          {% csrf_token %}
+          <div class="col-md">
+            <label for="">Product name:</label>
+            <input type="text" name="product" class="form-control" hx-get="{% url 'check_product' %}", hx-trigger="keyup" hx-target="#product-out">
+            <div id="product-out"></div>
+            <br>
+            <label for="">Product price:</label>
+            <input type="number" name="price" class="form-control">
+            <br>
+            <button class="btn btn-success"
+              hx-post="{% url 'save_product' %}"
+              hx-trigger="click"
+              hx-target="#list-products"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+      <div id="list-products">
+        {% include "partials/htmx_components/list_all_products.html" %}
       </div>
     </div>
 

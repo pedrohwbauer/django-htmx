@@ -3,12 +3,13 @@ from . import views
 from . import htmx_views
 
 urlpatterns = [
-    path('list_products', views.list_products, name ='list_products')
+    path('list_products', views.list_products, name ='list_products'),
 ]
 
 htmx_urlpatterns = [
-    path('check_product', htmx_views.check_product, name='check_product')
-    # path('save_product/', )
+    path('check_product', htmx_views.check_product, name='check_product'),
+    path('save_product/', htmx_views.save_product, name='save_product'),
+    path('delete_product/<int:id>', htmx_views.delete_product, name='delete_product'),
 ]
 
 urlpatterns = urlpatterns + htmx_urlpatterns
